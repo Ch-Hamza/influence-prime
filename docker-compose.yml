@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - app
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:root@db:5432/influence-prime
+      PORT: 3000
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - app
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=influence-prime
+    
+volumes:
+  db-data:
+
+networks:
+  app:
