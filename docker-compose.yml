@@ -1,10 +1,10 @@
 version: "3.8"
 services:
   server:
-    image: influence-prime-server
-    build:
-      context: ./server
-      dockerfile: Dockerfile
+    image: hamzachebil/influence-prime
+    #build:
+      #context: ./server
+      #dockerfile: Dockerfile
     ports:
       - "3000:3000"
     networks:
@@ -14,6 +14,8 @@ services:
     environment:
       DATABASE_URL: postgres://postgres:root@db:5432/influence-prime
       PORT: 3000
+    deploy:
+      replicas: 3
   db:
     image: postgres
     ports:
