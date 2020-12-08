@@ -27,8 +27,10 @@ const main = async () => {
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
             resolvers: [CategoryResolver, UserResolver],
-            validate: false
+            validate: false,
         }),
+        introspection: true,
+        playground: true,
         context: () => ({})
     });
 
